@@ -1,1 +1,1 @@
-worker: python checker_v36.py
+worker: python bot.py
