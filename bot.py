@@ -28,7 +28,7 @@ from telegram.ext import (
 import phonenumbers
 
 # ═══════════════════════════════════════════════════════════
-BOT_TOKEN = "7365322312:AAE5rFC-sRBmd9evcHqrmdqqnY0vj-B9l6k"
+BOT_TOKEN = "8709521947:AAEZoyndKwA7pMBti4avuM5AlYjG6-HifA8"
 API_ID    = 29523861
 API_HASH  = "bd0bd302ac9139cbd6e9b78485b6606b"
 ADMIN_IDS = [7095358778]
