@@ -38,8 +38,8 @@ GREEN_INSTANCE_ID  = "4100585336"
 GREEN_API_TOKEN    = "657a702703174b5385611f0daf9867979bd8c50bb26e64104ad"
 # ═══════════════════════════════════════════════════════════
 
-VERSION = "v36 RESOLVEPHONE+GREENAPI"
-DEV     = "@badol_112"
+VERSION = "v36"
+DEV     = "@sadhin8miya"
 
 os.makedirs("sessions", exist_ok=True)
 os.makedirs("data",     exist_ok=True)
@@ -542,10 +542,9 @@ async def _check_task(uid, nums, prog_msg, reply_fn):
         try:
             await prog_msg.edit_text(
                 f"⏳ {checked}/{total} ({pct}%)\n"
-                f"🔵 Telegram Registered: {len(opened_list)}\n"
+                f"🔐 Registered: {len(opened_list)}\n"
                 f"✅ Fresh: {len(fresh_list)}\n"
                 f"❓ Error: {len(error_list)}\n"
-                f"{'🟢 Green API: ON' if use_green else '⚪ Green API: OFF'}\n"
                 f"⏱️ Delay: {delay}s"
             )
         except:
@@ -564,38 +563,28 @@ async def _check_task(uid, nums, prog_msg, reply_fn):
         pass
 
     # ── Summary ──
-    green_tg_count = sum(1 for i in opened_list if i.get("green") is True)
-    green_fr_count = sum(1 for i in fresh_list  if i.get("green") is True)
     summary = (
         f"✅ Check Complete!\n"
         f"━━━━━━━━━━━━━━━━\n"
         f"📋 Total: {total}\n"
-        f"🔵 Telegram Registered: {len(opened_list)}\n"
-        f"✅ Fresh (Telegram): {len(fresh_list)}\n"
+        f"🔐 Registered: {len(opened_list)}\n"
+        f"✅ Fresh: {len(fresh_list)}\n"
     )
-    if use_green:
-        summary += (
-            f"━━━━━━━━━━━━━━━━\n"
-            f"🟢 Green API Confirmed: {green_tg_count + green_fr_count}\n"
-            f"  └ Registered তে: {green_tg_count}\n"
-            f"  └ Fresh তে: {green_fr_count}\n"
-        )
     if error_list:
         summary += f"❓ Error: {len(error_list)}\n"
     await reply_fn(summary)
 
     # ── Registered list ──
     if opened_list:
-        text = f"🔵 Telegram Registered: {len(opened_list)}\n\n"
+        text = f"🔐 Registered Numbers: {len(opened_list)}\n\n"
         for item in opened_list:
             flag = PhoneUtils.get_flag(item["num"])
-            gicon = "🟢" if item.get("green") is True else ("🔴" if item.get("green") is False else "⚪")
             text += f"{flag} {item['num']}"
             if item.get("name"):
                 text += f" | {item['name']}"
             if item.get("user") and item["user"] != "NoUsername":
                 text += f" | @{item['user']}"
-            text += f" {gicon}\n"
+            text += "\n"
             if len(text) > 3800:
                 await reply_fn(text)
                 text = ""
@@ -606,9 +595,8 @@ async def _check_task(uid, nums, prog_msg, reply_fn):
     if fresh_list:
         text = f"✅ Fresh Numbers: {len(fresh_list)}\n\n"
         for item in fresh_list:
-            flag  = PhoneUtils.get_flag(item["num"])
-            gicon = "🟢" if item.get("green") is True else ("🔴" if item.get("green") is False else "⚪")
-            text += f"{flag} {item['num']} {gicon}\n"
+            flag = PhoneUtils.get_flag(item["num"])
+            text += f"{flag} {item['num']}\n"
             if len(text) > 3800:
                 await reply_fn(text)
                 text = ""
@@ -635,8 +623,7 @@ async def start(upd: Update, ctx: ContextTypes.DEFAULT_TYPE):
         f"👋 {u.first_name}\n"
         f"📱 Sessions: {len(sessions)}\n\n"
         f"🌍 All countries supported!\n"
-        f"⚡ Method: ResolvePhone (100% accurate)\n"
-        f"🟢 Green API: {'Active' if GREEN_INSTANCE_ID else 'OFF'}\n\n"
+        f"⚡ Method: ResolvePhone (100% accurate)\n\n"
         f"`/add_session acc1` - Add session\n"
         f"`/login +880...` - Login\n"
         f"`/otp 12345` - Enter OTP",
