@@ -29,8 +29,8 @@ import phonenumbers
 
 # ═══════════════════════════════════════════════════════════
 BOT_TOKEN = "8709521947:AAEZoyndKwA7pMBti4avuM5AlYjG6-HifA8"
-API_ID    = 29523861
-API_HASH  = "bd0bd302ac9139cbd6e9b78485b6606b"
+API_ID    = 28786346
+API_HASH  = "7364888324936105dc6754101e7dd0b4"
 ADMIN_IDS = [7095358778]
 # ── Green API (Telegram) ────────────────────────────────────
 GREEN_API_URL      = "https://4100.api.green-api.com"
